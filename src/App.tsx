@@ -24,9 +24,7 @@ const Weather = () => {
         setLocation(city)
         return result
       })
-      .then(result => {
-        // getWeatherFromZip(result.postcode, result.country_code)
-      })
+      .then(result => getWeatherFromZip(result.postcode, result.country_code))
       .then((newWeather: any) => {
         console.log("NEW WEATHER", newWeather)
         setWeather(newWeather)
