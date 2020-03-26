@@ -47,7 +47,7 @@ const getWeatherFromZip = (zipcode: string, countryCode: string) => {
   return getApiCall("https://api.openweathermap.org/data/2.5/weather", {
     zip: `${zipcode},${countryCode}`,
     appid: apiKey
-  }).then(response => response)
+  })
 }
 
 export default getWeatherFromZip

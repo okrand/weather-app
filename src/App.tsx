@@ -16,10 +16,10 @@ const Location = (userLocation: LocationProps) => {
 const Weather = () => {
   const [userCity, setLocation] = useState("Locating!")
   const [weather, setWeather] = useState<WeatherResponse | undefined>(undefined)
+  const [weatherIconLink, setWeatherIconLink] = useState("")
   useEffect(() => {
     getLocation
       .then((result: LocationResult) => {
-        console.log("GET LOCATION")
         const city = `${result.city}, ${result.state_code}`
         setLocation(city)
         return result
@@ -28,10 +28,14 @@ const Weather = () => {
       .then((newWeather: any) => {
         console.log("NEW WEATHER", newWeather)
         setWeather(newWeather)
+        setWeatherIconLink(
+          `http://openweathermap.org/img/wn/${newWeather.weather[0].icon}@2x.png`
+        )
       })
   }, [])
   return (
     <div>
+      <img src={weatherIconLink} alt="weather-icon" />
       <p id="weather">{weather?.weather[0].main || "Weathering!"}</p>
       <Location userCity={userCity} />
     </div>
@@ -42,7 +46,6 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <Weather />
       </header>
     </div>
