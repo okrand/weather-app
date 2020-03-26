@@ -7,14 +7,15 @@ type LocationProps = {
   userCity: string
 }
 
-const kToF = (kelvin: number) => ((kelvin - 273.15) * 1.8 + 32).toFixed()
+export const kToF = (kelvin: number) => ((kelvin - 273.15) * 1.8 + 32).toFixed()
+
 const Location = (userLocation: LocationProps) => {
   const { userCity } = userLocation
   return <p id="location">{userCity}</p>
 }
 
 const Weather = () => {
-  const [userCity, setLocation] = useState("Locating!")
+  const [userCity, setLocation] = useState("")
   const [weather, setWeather] = useState<string | undefined>(undefined)
   const [weatherIconLink, setWeatherIconLink] = useState("")
   useEffect(() => {
@@ -32,12 +33,14 @@ const Weather = () => {
         )
       })
   }, [])
-  return (
+  return weather ? (
     <div>
       <img src={weatherIconLink} alt="weather-icon" />
       <p id="weather">{weather && `${weather}°F`}</p>
       <Location userCity={userCity} />
     </div>
+  ) : (
+    <p>Loading!</p>
   )
 }
 

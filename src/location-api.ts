@@ -29,7 +29,7 @@ const getLatLon = new Promise<Position>((resolve, reject) => {
   }
 
   const error = () => {
-    console.log("Couldn't Retrieve Location")
+    console.error("Couldn't Retrieve Location")
   }
 
   if (!navigator.geolocation) {
@@ -50,7 +50,7 @@ const getUsableLocation = new Promise<LocationResult>(resolve =>
     .then((result: Position) => {
       resolve(getLocationFromCoordinates(result.lat, result.lon))
     })
-    .catch((error: string) => console.log(error))
+    .catch(() => console.error("Couldn't Get Your Location, Check Coordinates"))
 )
 
 export default getUsableLocation
