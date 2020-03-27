@@ -27,9 +27,10 @@ const Weather = () => {
       .then(result => getWeatherFromZip(result.postcode, result.country_code))
       .then((newWeather: WeatherResponse) => {
         newWeather && setWeather(kToF(newWeather.main.temp))
-        setWeatherIconLink(
-          `http://openweathermap.org/img/wn/${newWeather.weather[0].icon}@2x.png`
-        )
+        newWeather &&
+          setWeatherIconLink(
+            `http://openweathermap.org/img/wn/${newWeather.weather[0].icon}@2x.png`
+          )
       })
   }, [])
   return weather ? (
